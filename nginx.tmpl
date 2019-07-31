@@ -59,9 +59,19 @@ map $scheme $proxy_x_forwarded_ssl {
 
 gzip_types text/plain text/css application/javascript application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript;
 
-log_format vhost '$host $remote_addr - $remote_user [$time_local] '
-                 '"$request" $status $body_bytes_sent '
-                 '"$http_referer" "$http_user_agent"';
+log_format vhost escape=json
+	'{'
+	'"time_local":"$time_local",'
+	'"remote_addr":"$remote_addr",'
+	'"remote_user":"$remote_user",'
+	'"request_method":"$request_method",'
+	'"request":"$request",'
+	'"status": "$status",'
+	'"body_bytes_sent":"$body_bytes_sent",'
+	'"request_time":"$request_time",'
+	'"http_referrer":"$http_referer",'
+	'"http_user_agent":"$http_user_agent"'
+	'}';
 
 access_log off;
 

@@ -4,11 +4,11 @@ services:
     image: jwilder/nginx-proxy
     container_name: nginx-proxy
     ports:
-      - "80:80"
+      - "8080:80"
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
 
   whoami:
-    image: jwilder/whoami
+    image: nginxdemos/hello
     environment:
-      - VIRTUAL_HOST=whoami.local
+      - VIRTUAL_HOST=localhost
